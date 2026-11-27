@@ -12,6 +12,10 @@ A Django checkbook application completed while learning Python with Pitman Train
 - Validation for required fields and monetary amounts.
 - A green banking theme and responsive page layouts.
 
+## Technologies Used
+
+Python, Django, SQLite, HTML, CSS and Bootstrap. Dependencies are listed in [requirements.txt](requirements.txt).
+
 ## Requirements
 
 - Python 3.12 or newer.
@@ -63,7 +67,7 @@ python manage.py check
 python manage.py test Checkbook
 ```
 
-The project includes 14 automated tests covering account selection, balance calculations, redirects, and form validation. Tests use a separate database.
+The project includes 14 automated test methods covering account selection, balance calculations, redirects, and form validation. Tests use a separate database. These tests were reviewed but were not executed as part of this documentation update; no passing result is claimed here.
 
 ## Project structure
 
@@ -83,3 +87,20 @@ Django_Checkbook_Project/
 This is a local coursework project using `DEBUG = True`. Set `DJANGO_SECRET_KEY` in your shell to use a consistent local key. If it is unset, Django generates a temporary key for each process. The application does not automatically load `.env` files.
 
 The templates load Bootstrap CSS from a CDN; the main green theme is supplied by the project's local stylesheet.
+
+## What I Learned
+
+- Connecting account and transaction models with a foreign key.
+- Processing model forms and displaying validation errors.
+- Routing to an account-specific balance sheet and redirecting after submissions.
+- Calculating running balances with decimal amounts and ordered transactions.
+- Writing Django tests for valid and invalid requests and checking database changes.
+
+## Known Limitations
+
+- This is a local coursework application, without bank integrations or production deployment configuration.
+- The account and transaction pages do not require user authentication or enforce ownership of accounts.
+- Withdrawals are not checked against available funds, so balances can become negative.
+- The web interface does not provide editing or deletion of accounts or transactions.
+
+[Back to the repository overview](../README.md)

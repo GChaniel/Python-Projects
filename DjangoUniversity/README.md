@@ -11,9 +11,13 @@ A Django project for managing university classes and campuses through the Django
 
 The two models are independent; there is currently no relationship linking a class to a campus. The application currently exposes only the admin site. A public homepage and custom views have not been implemented.
 
+## Technologies Used
+
+Python, Django and SQLite. Dependencies are listed in [requirements.txt](requirements.txt).
+
 ## Requirements
 
-- Python 3.12 or newer. The project has been checked with Python 3.14.5.
+- Python 3.12 or newer.
 - pip and Python's `venv` module.
 - Django 6.1.3, pinned in `requirements.txt`.
 
@@ -73,7 +77,7 @@ Follow the prompts to choose your username, email address, and password. You wil
 python manage.py runserver
 ```
 
-Open **http://127.0.0.1:8000/admin/** and sign in. Select the class or campus model to add your first records. With the current development settings, opening **http://127.0.0.1:8000/** shows Django's default welcome page because no custom homepage route is defined.
+Open **http://127.0.0.1:8000/admin/** and sign in. Select the class or campus model to add your first records. Use the `/admin/` URL; no custom homepage route is defined.
 
 Press **Ctrl+C** in the terminal to stop the server.
 
@@ -112,3 +116,19 @@ python manage.py migrate
 `DJANGO_SECRET_KEY` can be set as an environment variable before running Django. If it is unset, the project generates a temporary key for each process. Set a consistent value locally if you want sessions to remain valid across server restarts. Keep your key out of source control. Environment variables must be set in your shell; this project does not automatically load `.env` files.
 
 The current settings use `DEBUG = True` and Django's development server. They are intended for local learning and development. Production deployment requires separate configuration.
+
+## What I Learned
+
+- Defining Django models and creating migrations for database tables.
+- Registering models in the admin site for record management.
+- Using `__str__` to make records readable in admin lists.
+- Setting up a local SQLite database and administrator account.
+
+## Known Limitations
+
+- Classes and campuses are independent models, with no relationship between them.
+- Record management is available through Django admin only; custom public views are not implemented.
+- The test modules contain starter scaffolding rather than automated test cases. This documentation review did not run the application.
+- The settings are intended for local development, as described above.
+
+[Back to the repository overview](../README.md)
