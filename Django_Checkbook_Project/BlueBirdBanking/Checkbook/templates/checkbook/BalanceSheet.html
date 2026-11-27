@@ -1,0 +1,52 @@
+{% extends 'checkbook_base.html' %}
+{% block title %}Balance sheet | Bluebird Banking{% endblock %}
+{% block content %}
+    <div class="page-intro">
+        <p class="eyebrow">Your account at a glance</p>
+        <h1>Balance sheet</h1>
+        <p class="page-description">Your account details and recent activity, all in one place.</p>
+    </div>
+    <section class="panel" aria-label="Account summary and transactions">
+        <div id="all-transactions-form">
+            <!-- Display the account and final balance passed in the view's content dictionary. -->
+            <form>
+                <label for="accountholder">Account holder</label>
+                <input id="accountholder" type="text" name="accountHolder" value="{{ account }}" readonly>
+                <label for="balance">Current balance</label>
+                <input id="balance" type="text" name="currentBalance" value="{{ balance|floatformat:2 }}" readonly>
+                <a class="button" href="{% url 'transaction' %}">Add transaction</a>
+            </form>
+        </div>
+        <h2>Recent transactions</h2>
+        <!-- Only the table scrolls horizontally on narrow screens. -->
+        <div class="table-scroll" role="region" aria-label="Recent transactions" tabindex="0">
+            <table id="transactions-table">
+                <thead>
+                    <tr id="headerRow">
+                        <th scope="col" class="center">Date</th>
+                        <th scope="col" class="center">Type</th>
+                        <th scope="col" class="left">Description</th>
+                        <th scope="col" class="right">Amount</th>
+                        <th scope="col" class="right">Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- The dictionary pairs each transaction (key) with its running balance (total). -->
+                    {% for key, total in table_contents.items %}
+                        <tr>
+                            <td class="center">{{ key.date }}</td>
+                            <td class="center">{{ key.type }}</td>
+                            <td class="left">{{ key.description }}</td>
+                            <td class="right">{{ key.amount|floatformat:2 }}</td>
+                            <td class="right">{{ total|floatformat:2 }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5">No transactions yet. Your balance is your opening deposit.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}

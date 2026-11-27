@@ -1,0 +1,36 @@
+{% extends "checkbook_base.html" %}
+{% block title %}Overview | Bluebird Banking{% endblock %}
+{% block content %}
+    <div class="page-intro">
+        <p class="eyebrow">Your everyday banking</p>
+        <h1>A little clarity.<br>A lot more control.</h1>
+        <p class="page-description">Welcome to Bluebird. View your accounts and keep track of your everyday transactions.</p>
+    </div>
+    <div class="account-grid">
+        <section class="panel" aria-labelledby="existing-account-heading">
+            <p class="eyebrow">Your accounts</p>
+            <h2 id="existing-account-heading">Pick up where you left off</h2>
+            <p>Choose an account to view its balance and transactions.</p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="field-group">
+                    <label id="index-label" for="{{ form.account.id_for_label }}">Choose account</label>
+                    <!-- Show an error if the submitted account is missing or no longer exists. -->
+                    {{ form.account.errors }}
+                    <!-- Render only the account dropdown, rather than the entire transaction form. -->
+                    <!-- Each option uses Accounts.__str__() to display the account holder's name. -->
+                    {{ form.account }}
+                </div>
+                <!-- Submit the selected account ID to the home view, which redirects to its balance sheet. -->
+                <button type="submit">Go to account</button>
+            </form>
+        </section>
+        <section class="panel panel-accent" aria-labelledby="new-account-heading">
+            <p class="eyebrow">A fresh start</p>
+            <h2 id="new-account-heading">Make room for your next goal</h2>
+            <p>Create another account and start keeping track of your money, one transaction at a time.</p>
+            <!-- Navigation uses a link styled as a button, rather than nested controls. -->
+            <a class="button button-secondary" href="{% url 'create' %}">Create an account</a>
+        </section>
+    </div>
+{% endblock %}

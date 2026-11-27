@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Our stylesheet follows Bootstrap so the project theme takes precedence. -->
+    <link rel="stylesheet" href="{% static 'CSS/CheckbookApp.css' %}">
+    <title>{% block title %}Bluebird Banking{% endblock %}</title>
+</head>
+<body id="body">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="{% url 'index' %}" aria-label="Bluebird Banking home">
+                <span class="brand-name">Bluebird</span>
+                <span class="brand-caption">BANKING</span>
+            </a>
+            <!-- Resolve navigation links by URL name and highlight the current page. -->
+            <nav class="site-nav" aria-label="Main navigation">
+                <a href="{% url 'index' %}" {% if request.resolver_match.url_name == 'index' %}aria-current="page"{% endif %}>Overview</a>
+                <a href="{% url 'transaction' %}" {% if request.resolver_match.url_name == 'transaction' %}aria-current="page"{% endif %}>Add transaction</a>
+                <a href="{% url 'create' %}" {% if request.resolver_match.url_name == 'create' %}aria-current="page"{% endif %}>Create account</a>
+            </nav>
+        </div>
+    </header>
+    <main id="main-content" class="checkbook-container" tabindex="-1">
+        {% block content %}{% endblock %}
+    </main>
+    <!-- Normal document flow prevents the footer from covering long tables or forms. -->
+    <footer id="block-footer">
+        <div class="footer-inner">
+            <p>&copy; 2026 Bluebird Banking</p>
+            <p class="footer-note">Django Checkbook Project</p>
+        </div>
+    </footer>
+</body>
+</html>

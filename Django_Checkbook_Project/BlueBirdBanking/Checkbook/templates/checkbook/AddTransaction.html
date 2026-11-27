@@ -1,0 +1,20 @@
+{% extends 'checkbook_base.html' %}
+{% block title %}Add transaction | Bluebird Banking{% endblock %}
+{% block content %}
+    <div class="page-intro">
+        <p class="eyebrow">Keep things up to date</p>
+        <h1>Add a transaction</h1>
+        <p class="page-description">Record money coming in or going out of your account.</p>
+    </div>
+    <div class="new-transaction-form panel form-panel">
+        <!-- Keep the existing form fields and POST handling supplied by the Django view. -->
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-actions">
+                <button id="new-transaction-button" type="submit" name="Save_Transaction">Add transaction</button>
+                <a href="{% url 'index' %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
